@@ -69,4 +69,23 @@ A[1,]
 A[-c(1,3),]
 dim(A)
 #loading data
-?read.table
+setwd("C:/Users/l.piccolo/Desktop/REPO\ PERSONALE/introtostatlearning-withappinR/Datasets")
+getwd()
+Auto = read.table("Auto.data")
+fix(Auto)
+Auto = read.table("Auto.data", header=T, na.strings="?")
+fix(Auto)
+dim(Auto)
+names(Auto)
+#additional graphical and numerical summaries
+plot(Auto$cylinders, Auto$mpg)
+attach(Auto)
+plot(cylinders, mpg)
+plot(as.factor(cylinders), mpg, col="red", varwidth=T, xlab="cylinders", ylab="mpg")
+hist(mpg, col="red", breaks=15)
+pairs(Auto)
+pairs(~ mpg + displacement + horsepower + weight + acceleration, Auto)
+plot(horsepower, mpg)
+identify(horsepower, mpg, name)
+summary(Auto)
+summary(mpg)
