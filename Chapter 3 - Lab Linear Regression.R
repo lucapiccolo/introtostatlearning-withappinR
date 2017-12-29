@@ -43,3 +43,53 @@ summary(lm.fit)
 ?summary.lm
 summary(lm.fit)$r.squared
 summary(lm.fit)$sigma
+vif(lm.fit)
+summary(lm.fit)
+
+lm.fit1 = lm(medv~.-age, data=Boston)
+summary(lm.fit1)
+?update
+
+#Interaction terms
+lm.fit = lm(medv~lstat*age, data=Boston)
+summary(lm.fit)
+
+#Non-linear transformations of the predictors
+lm.fit2 = lm(medv~lstat+I(lstat^2), data=Boston)
+summary(lm.fit2)
+lm.fit = lm(medv~lstat, data=Boston)
+
+anova(lm.fit, lm.fit2)
+par(mfrow=c(2,2))
+plot(lm.fit2)
+
+lm.fit5 = lm(medv~poly(lstat,5), data=Boston)
+summary(lm.fit5)
+
+lm.fitLog = lm(medv~log(lstat), data=Boston)
+summary(lm.fitLog)
+par(mfrow=c(2,2))
+plot(lm.fitLog)
+
+#Qualitative predictors
+fix(Carseats)
+names(Carseats)
+attach(Carseats)
+
+par(mfrow=c(1,1))
+shLSales <- data.frame(oShelveLoc <- factor(ShelveLoc, levels=c("Bad", "Medium", "Good")), Sales)
+indexOrd <- order(oShelveLoc)
+SshLSales <- shLSales[indexOrd,]
+plot(SshLSales[,1], SshLSales[,2], xlab="Shelve location", ylab="Sales")
+
+lm.fit = lm(Sales~.+Income:Advertising+Price:Age, data=Carseats)
+summary(lm.fit)
+contrasts(ShelveLoc) #get coding for dummy variable
+
+#Writing functions
+LoadLibraries = function() {
+  library(ISLR)
+  library(MASS)
+  print("The libraries ISLR and MASS have been loaded.")
+}
+LoadLibraries()
