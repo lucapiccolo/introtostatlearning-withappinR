@@ -21,3 +21,9 @@ summary(lm.fit.inv) #est: 0.39111, stderr: 0.02089, t: 18.73, pval: <2e-16
 
 #What is the relationship?
 #The normal component (y = 2*x+norm) is such that est1 != 1/est2
+
+#Show that, for regression y~x and x~y, the t-statistic for the coeff. of the variable is the same
+lm.fit1 <- lm(y~x)
+lm.fit2 <- lm(x~y)
+coefficients(summary(lm.fit1))
+coefficients(summary(lm.fit2)) #t-statistic is the same
